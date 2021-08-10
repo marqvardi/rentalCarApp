@@ -1,7 +1,7 @@
 import { carActionsType } from "../../redux/reducers/carsReducer/carActionTypes";
 import { firestore } from "../firebase.utils";
 
-export const fetchCarsFromFirestore = (isCarAvailable) => async (dispatch) => {
+export const fetchCarsFromFirestore = () => async (dispatch) => {
   const data = await getAllCarsFromFirestore();
 
   dispatch({ type: carActionsType.GET_ALL_CARS, payload: data });

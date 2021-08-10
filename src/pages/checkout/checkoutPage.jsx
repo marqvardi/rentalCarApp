@@ -19,7 +19,7 @@ const CheckoutPage = () => {
     return (
       <div>
         <div className="main">
-          <div>
+          <div style={{ marginRight: "50px" }}>
             <CarsCard car={basketFromRedux.car} />
           </div>
           <div>

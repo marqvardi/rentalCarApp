@@ -29,3 +29,18 @@
     flex-direction: column;
   }
 }
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.main-content {
+  position: fixed;
+  right: 0;
+  width: 80%;
+  height: 100%;
+  margin-top: 75px;
+  overflow: auto;
+  padding: 40px;
+}

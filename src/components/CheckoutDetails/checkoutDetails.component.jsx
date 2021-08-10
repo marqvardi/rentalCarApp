@@ -13,7 +13,7 @@ const CheckoutDetails = ({
   const total = days * car.price;
 
   return (
-    <div className="main">
+    <div className="mainCheckout">
       <Grid columns={2} className="text">
         <Grid.Column>Pick up date</Grid.Column>
         {/* <Grid.Column>{datePickUp.toString()}</Grid.Column> */}

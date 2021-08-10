@@ -14,7 +14,7 @@ const HeaderComponent = () => {
   const handleSignOut = () => {
     auth.signOut();
     history.push("/");
-    toast.info("Logging out, being redirected", {
+    toast.info("User logging out", {
       position: "bottom-right",
     });
   };

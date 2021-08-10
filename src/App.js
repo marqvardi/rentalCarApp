@@ -17,6 +17,8 @@ import SidebarComponent from "../src/components/sidebar/sidebar.component.jsx";
 import { getCurrentUser } from "./redux/reducers/userReducer/user.selector";
 import OrdersPage from "./pages/userOrders/OrdersPage";
 import DashboardPage from "./pages/dashboardPage/dashboard.component";
+import CarsAdminPage from "./pages/carsAdmin/carsAdminPage";
+import { Container } from "semantic-ui-react";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -52,28 +54,34 @@ const App = () => {
   return (
     <div>
       <Router history={history}>
-        <HeaderComponent />
-        {/* <div className="gridflex"> */}
-        {/* <div className="sidebar"> */}
-        {currentUser && <SidebarComponent />}
-        {/* </div> */}
+        <div className="wrapper">
+          <HeaderComponent />
+          {/* <div className="gridflex"> */}
+          {/* <div className="sidebar"> */}
+          {currentUser && <SidebarComponent />}
+          {/* </div> */}
 
-        <div className="main">
-          <Switch>
-            {/* <Container className="container"> */}
-            <Route path="/" component={CarListing} exact />
-            <Route path="/renting/:id" component={CarRentingPage} />
-            <Route path="/signInOrRegister" component={SignInOrRegisterPage} />
-            <Route path="/checkout" component={CheckoutPage} />
-            <Route path="/Orders" component={OrdersPage} />
-            <Route path="/Dashboard" component={DashboardPage} />
-            {/* <CarListing /> */}
-            {/* </Container> */}
-          </Switch>
+          <div className="main-content">
+            <Switch>
+              {/* <Container className="container"> */}
+              <Route path="/" component={CarListing} exact />
+              <Route path="/renting/:id" component={CarRentingPage} />
+              <Route
+                path="/signInOrRegister"
+                component={SignInOrRegisterPage}
+              />
+              <Route path="/checkout" component={CheckoutPage} />
+              <Route path="/Orders" component={OrdersPage} />
+              <Route path="/Dashboard" component={DashboardPage} />
+              <Route path="/CarsAdmin" component={CarsAdminPage} />
+              {/* <CarListing /> */}
+              {/* </Container> */}
+            </Switch>
+          </div>
+
+          {/* <FooterComponent /> */}
+          {/* </div> */}
         </div>
-
-        {/* <FooterComponent /> */}
-        {/* </div> */}
       </Router>
     </div>
   );
