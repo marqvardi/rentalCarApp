@@ -7,17 +7,18 @@ import history from "../../util/history";
 import { auth } from "../../firebase/firebase.utils";
 
 import { toast } from "react-toastify";
+import RenderInput from "../renderinput/renderInput.component";
 
 class Register extends React.Component {
-  renderInput = ({ input, label, type, meta: { error, touched } }) => (
-    // console.log(input);
+  // renderInput = ({ input, label, type, meta: { error, touched } }) => (
+  //   // console.log(input);
 
-    <div className="field">
-      <label>{label}</label>
-      <input {...input} type={type} autoComplete="off" />
-      <div style={{ color: "red" }}>{touched ? error : ""}</div>
-    </div>
-  );
+  //   <div className="field">
+  //     <label>{label}</label>
+  //     <input {...input} type={type} autoComplete="off" />
+  //     <div style={{ color: "red" }}>{touched ? error : ""}</div>
+  //   </div>
+  // );
 
   onSubmit = async (formValues) => {
     console.log(formValues);
@@ -45,6 +46,7 @@ class Register extends React.Component {
   render() {
     // console.log(this.props);
     const { valid } = this.props;
+    console.log(this.props);
 
     return (
       <div>
@@ -56,26 +58,26 @@ class Register extends React.Component {
         >
           <Field
             name="displayName"
-            component={this.renderInput}
+            component={RenderInput}
             label="Enter name"
             type="text"
           />
 
           <Field
             name="email"
-            component={this.renderInput}
+            component={RenderInput}
             label="Enter email"
             type="email"
           />
           <Field
             name="password"
-            component={this.renderInput}
+            component={RenderInput}
             label="Enter password"
             type="password"
           />
           <Field
             name="confirmPassword"
-            component={this.renderInput}
+            component={RenderInput}
             label="Confirm password"
             type="password"
           />

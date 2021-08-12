@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { carActionsType } from "../../redux/reducers/carsReducer/carActionTypes";
 import { firestore } from "../firebase.utils";
 
@@ -18,6 +19,34 @@ export const updateCarAvailability = (id) => async (dispatch) => {
     available: false,
   });
   dispatch({ type: carActionsType.RETURN_CAR, payload: id });
+};
+
+///Connecting to firestore
+
+export const addCarToFirestore = async ({
+  model,
+  maker,
+  year,
+  price,
+  description,
+}) => {
+  firestore
+    .collection("carsCollection")
+    .add({
+      carMaker: maker,
+      carModel: model,
+      year,
+      price,
+      description,
+      available: true,
+    })
+    .then(() => {
+      toast.success("Car successfully created");
+      // console.log("DocRef created with ID", docrRef.id);
+    })
+    .catch((error) => {
+      console.log("Error creating car", error);
+    });
 };
 
 const getSingleCarFromDatabase = async (id) => {

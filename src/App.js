@@ -19,6 +19,7 @@ import OrdersPage from "./pages/userOrders/OrdersPage";
 import DashboardPage from "./pages/dashboardPage/dashboard.component";
 import CarsAdminPage from "./pages/carsAdmin/carsAdminPage";
 import { Container } from "semantic-ui-react";
+import CreateCarsPage from "./pages/createCars/createCarsPage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -62,21 +63,24 @@ const App = () => {
           {/* </div> */}
 
           <div className="main-content">
-            <Switch>
-              {/* <Container className="container"> */}
-              <Route path="/" component={CarListing} exact />
-              <Route path="/renting/:id" component={CarRentingPage} />
-              <Route
-                path="/signInOrRegister"
-                component={SignInOrRegisterPage}
-              />
-              <Route path="/checkout" component={CheckoutPage} />
-              <Route path="/Orders" component={OrdersPage} />
-              <Route path="/Dashboard" component={DashboardPage} />
-              <Route path="/CarsAdmin" component={CarsAdminPage} />
-              {/* <CarListing /> */}
-              {/* </Container> */}
-            </Switch>
+            <Container>
+              <Switch>
+                {/* <Container className="container"> */}
+                <Route path="/" component={CarListing} exact />
+                <Route path="/renting/:id" component={CarRentingPage} />
+                <Route
+                  path="/signInOrRegister"
+                  component={SignInOrRegisterPage}
+                />
+                <Route path="/checkout" component={CheckoutPage} />
+                <Route path="/Orders" component={OrdersPage} />
+                <Route path="/Dashboard" component={DashboardPage} />
+                <Route path="/CarsAdmin" component={CarsAdminPage} />
+                <Route path="/CreateCars" component={CreateCarsPage} />
+                {/* <CarListing /> */}
+                {/* </Container> */}
+              </Switch>
+            </Container>
           </div>
 
           {/* <FooterComponent /> */}

@@ -23,11 +23,9 @@ const CarRentingPage = (props) => {
   const dispatch = useDispatch();
   const car = useSelector(fetchSingleCar);
   const isSignedIn = useSelector(checkIfUserIsSignerIn);
-  console.log("rentingpage ouseide useefeect");
 
   useEffect(() => {
     dispatch(fetchSingleCarFromFirestore(id));
-    console.log("rentingpage useeffect");
 
     return () => {
       // dispatch({ type: carActionsType.FETCH_SINGLE_CAR, payload: {} });

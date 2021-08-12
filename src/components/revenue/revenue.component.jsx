@@ -4,22 +4,25 @@ import "./revenue.styles.css";
 
 const Revenue = ({ revenue, projectionRevenue }) => {
   return (
-    <Statistic.Group widths="two">
-      <Statistic>
-        <Statistic.Value>
-          <Icon name="chart line" />{" "}
-          {projectionRevenue.toFixed(2).toLocaleString()}
-        </Statistic.Value>
-        <Statistic.Label>Amount due</Statistic.Label>
-      </Statistic>
+    <div style={{ marginTop: "50px", border: "solid", borderRadius: "20px" }}>
+      <h2 style={{ textAlign: "center", marginBottom: "50px" }}>Revenue</h2>
+      <Statistic.Group widths="two">
+        <Statistic>
+          <Statistic.Value>
+            <Icon name="chart line" />{" "}
+            {projectionRevenue.toFixed(2).toLocaleString()}
+          </Statistic.Value>
+          <Statistic.Label>Amount due</Statistic.Label>
+        </Statistic>
 
-      <Statistic>
-        <Statistic.Value>
-          <Icon name="money" /> {revenue.toFixed(2)}
-        </Statistic.Value>
-        <Statistic.Label>Revenue so far</Statistic.Label>
-      </Statistic>
-    </Statistic.Group>
+        <Statistic>
+          <Statistic.Value>
+            <Icon name="money" /> {revenue.toFixed(2)}
+          </Statistic.Value>
+          <Statistic.Label>Revenue so far</Statistic.Label>
+        </Statistic>
+      </Statistic.Group>
+    </div>
   );
 };
 
