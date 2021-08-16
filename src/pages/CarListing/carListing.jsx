@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { carActionsType } from "../../redux/reducers/carsReducer/carActionTypes";
-import { Button, Container, Grid, Loader } from "semantic-ui-react";
+import { Button, Container, Grid, Icon, Loader } from "semantic-ui-react";
 import "./carListing.styles.css";
 
 import CarsCard from "../../components/carsCard/carsCard";
@@ -15,22 +15,19 @@ import _ from "lodash";
 const CarListing = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
+
   const BasketHasItem = useSelector(getBasket);
   const auth = useSelector(getCurrentUser);
   const cars = useSelector(getCars);
-  // const ArrayCars = Array.from(cars);
   const ArrayCars = _.orderBy(cars, ["available"], ["desc"]);
 
   useEffect(() => {
-    setTimeout(() => {
-      dispatch(fetchCarsFromFirestore());
+    dispatch(fetchCarsFromFirestore());
+    setLoading(false);
 
-      setLoading(false);
-    }, 3000);
-
-    return () => {
-      dispatch({ type: carActionsType.GET_ALL_CARS, payload: {} });
-    };
+    // return () => {
+    //   dispatch({ type: carActionsType.GET_ALL_CARS, payload: {} });
+    // };
   }, [dispatch, auth]);
 
   const renderGrid = (cars) => {
@@ -57,12 +54,16 @@ const CarListing = () => {
                 cars.map((car) => (
                   <Grid.Column key={car.id}>
                     {car.available ? (
-                      <Link to={`/renting/${car.id}`}>
-                        <CarsCard car={car} color="green" />
-                      </Link>
+                      <div>
+                        <CarsCard car={car} color="green" loading={loading} />
+                        <Link to={`/renting/${car.id}`}>
+                          <br />
+                          <Button color="green" content="Rent this car" fluid />
+                        </Link>
+                      </div>
                     ) : (
                       <div className="notAvailable">
-                        <CarsCard car={car} color="red" />
+                        <CarsCard car={car} color="red" loading={loading} />
                       </div>
                     )}
                   </Grid.Column>

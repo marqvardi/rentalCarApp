@@ -37,9 +37,8 @@ const DashboardPage = () => {
   useEffect(() => {
     dispatch(FetchOrders(currentUser, isAdmin));
     dispatch(fetchCarsFromFirestore());
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
+
+    setLoading(false);
 
     return () => {
       dispatch({ type: orderActionTypes.CLEAR_ORDERS });

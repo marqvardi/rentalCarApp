@@ -22,6 +22,11 @@ const carsReducer = (state = INITIAL_STATE, { type, payload }) => {
         ...state,
         car: { ...state.car, available: false },
       };
+    case carActionsType.CLEAR_CAR:
+      return {
+        ...state,
+        car: {},
+      };
 
     default:
       return state;

@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import CarsCard from "../../components/carsCard/carsCard";
 
-import { Button, Container, Form, Modal } from "semantic-ui-react";
+import { Button, Container, Form, Loader, Modal } from "semantic-ui-react";
 import { DateTimePicker, DropdownList } from "react-widgets";
 import { Field, reduxForm } from "redux-form";
 import { TimeList } from "../../util/timeList";
@@ -15,24 +15,29 @@ import { countDays } from "../../util/countDays";
 import { fetchSingleCar } from "../../redux/reducers/carsReducer/cars.selector";
 import { checkIfUserIsSignerIn } from "../../redux/reducers/userReducer/user.selector";
 import { fetchSingleCarFromFirestore } from "../../firebase/carDataAccess/carDataAccess";
-
 import { clearFetchCar } from "../../redux/reducers/carsReducer/CarsReducer";
+import _ from "lodash";
 
 const CarRentingPage = (props) => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const car = useSelector(fetchSingleCar);
   const isSignedIn = useSelector(checkIfUserIsSignerIn);
+  const [loading, setLoading] = useState(true);
+  const car = useSelector(fetchSingleCar);
 
   useEffect(() => {
     dispatch(fetchSingleCarFromFirestore(id));
 
-    return () => {
-      // dispatch({ type: carActionsType.FETCH_SINGLE_CAR, payload: {} });
-    };
-  }, [dispatch, props, id]);
+    // console.log(car);
+    setLoading(false);
+
+    // return () => {
+    //   dispatch({ type: carActionsType.CLEAR_CAR, payload: {} });
+    // };
+  }, []);
 
   let date = new Date();
+  // console.log(car);
 
   const renderDateTimePicker = ({ input: { onChange, value }, showTime }) => {
     return (
@@ -92,6 +97,7 @@ const CarRentingPage = (props) => {
   const handleGoBack = () => {
     dispatch(clearFetchCar());
     history.goBack();
+    // history.push("/");
   };
 
   const { valid } = props;
@@ -153,13 +159,17 @@ const CarRentingPage = (props) => {
 
   return (
     <div style={{ marginTop: "100px" }}>
-      <Container>
-        <div className="box">
-          <CarsCard key={car.id} car={car} />
+      {!_.isEmpty(car) && !loading ? (
+        <Container>
+          <div className="box">
+            <CarsCard car={car} loading={loading} color="green" />
 
-          {renderForm()}
-        </div>
-      </Container>
+            {renderForm()}
+          </div>
+        </Container>
+      ) : (
+        <Loader active inline="centered" content="Fetching info" />
+      )}
     </div>
   );
 };

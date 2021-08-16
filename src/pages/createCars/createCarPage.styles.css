@@ -1,0 +1,22 @@
+.createCarPage-main {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.left-content {
+  flex: 1;
+  max-width: 50%;
+  margin: 20px;
+  min-width: 300px;
+}
+
+.right-content {
+  flex: 1;
+  max-width: 50%;
+  min-width: 300px;
+}
+
+h2 {
+  text-align: center;
+}

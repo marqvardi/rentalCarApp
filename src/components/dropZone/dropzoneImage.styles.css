@@ -1,0 +1,25 @@
+.dropzoneImage {
+  height: 4rem;
+  margin: 1rem;
+  padding: 1rem;
+  border: 2px dashed salmon;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.DropZoneActive {
+  border: 2px solid rebeccapurple;
+  height: 4rem;
+  margin: 1rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+}

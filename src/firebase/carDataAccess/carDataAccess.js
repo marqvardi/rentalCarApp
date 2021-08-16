@@ -1,5 +1,7 @@
+import _ from "lodash";
 import { toast } from "react-toastify";
 import { carActionsType } from "../../redux/reducers/carsReducer/carActionTypes";
+import history from "../../util/history";
 import { firestore } from "../firebase.utils";
 
 export const fetchCarsFromFirestore = () => async (dispatch) => {
@@ -29,9 +31,10 @@ export const addCarToFirestore = async ({
   year,
   price,
   description,
+  image,
 }) => {
   firestore
-    .collection("carsCollection")
+    .collection("cars")
     .add({
       carMaker: maker,
       carModel: model,
@@ -39,9 +42,11 @@ export const addCarToFirestore = async ({
       price,
       description,
       available: true,
+      image: _.pick(image, "public_id", "url"),
     })
     .then(() => {
       toast.success("Car successfully created");
+      history.push("CarsAdmin");
       // console.log("DocRef created with ID", docrRef.id);
     })
     .catch((error) => {
@@ -50,10 +55,10 @@ export const addCarToFirestore = async ({
 };
 
 const getSingleCarFromDatabase = async (id) => {
-  const data = await firestore.collection("cars").doc(id);
+  const data = firestore.collection("cars").doc(id);
 
   //Thats for a single document
-  const singleDoc = data
+  const singleDoc = await data
     .get()
     .then((doc) => {
       if (doc.exists) {

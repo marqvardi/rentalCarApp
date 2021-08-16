@@ -16,9 +16,7 @@ const CarsAdminPage = () => {
 
   useEffect(() => {
     dispatch(fetchCarsFromFirestore());
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
+    setLoading(false);
   }, [dispatch]);
 
   const totalCars = _.size(allCars);
