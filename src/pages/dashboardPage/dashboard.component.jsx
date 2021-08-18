@@ -12,24 +12,22 @@ import {
 import { FetchOrders } from "../../firebase/bookingsDataAccess/bookingsDataAccess";
 import { orderActionTypes } from "../../redux/reducers/orderReducer/orderActionTypes";
 import InfoCars from "../../components/carsInfo/carsInfo.component";
-import { getCars } from "../../redux/reducers/carsReducer/cars.selector";
+import {
+  getFleetTotal,
+  getTotalCarsAvailable,
+  getTotalCarsNotAvailable,
+} from "../../redux/reducers/carsReducer/cars.selector";
 import { fetchCarsFromFirestore } from "../../firebase/carDataAccess/carDataAccess";
-import _ from "lodash";
 
 const DashboardPage = () => {
   const isAdmin = useSelector(checkIfUserIsAdmin);
   const currentUser = useSelector(getCurrentUser);
   const ProjectionRevenue = useSelector(computeProjectedSales);
   const revenue = useSelector(computeRevenue);
-  const allCars = useSelector(getCars);
-  const totalCars = _.size(allCars);
+  const totalCars = useSelector(getFleetTotal);
+  const available = useSelector(getTotalCarsAvailable);
+  const notAvailable = useSelector(getTotalCarsNotAvailable);
 
-  const available = Array.from(allCars).filter(
-    (car) => car.available === true
-  ).length;
-  const notAvailable = Array.from(allCars).filter(
-    (car) => car.available === false
-  ).length;
   const [loading, setLoading] = useState(true);
 
   const dispatch = useDispatch();

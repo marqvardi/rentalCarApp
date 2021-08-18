@@ -10,7 +10,9 @@ import "./dropzoneImage.styles.css";
 import { Image } from "semantic-ui-react";
 
 const DropZoneImage = ({ stateChanger }) => {
-  const [uploadFile, setUploadFile] = useState();
+  const [uploadFile, setUploadFile] = useState(
+    process.env.PUBLIC_URL + "/assets/nocar.jpg"
+  );
   const onDrop = useCallback(
     (acceptedFiles) => {
       console.log(acceptedFiles);

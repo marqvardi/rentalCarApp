@@ -33,7 +33,7 @@ const OrdersDetails = ({
         </List.Item>
         <List.Item>
           <List.Icon name="dollar sign" />
-          <List.Content>{total}</List.Content>
+          <List.Content>{total.toFixed(2)}</List.Content>
           {active ? (
             <Button
               color="orange"

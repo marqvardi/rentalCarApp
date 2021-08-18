@@ -5,28 +5,27 @@ import { Button } from "semantic-ui-react";
 import InfoCars from "../../components/carsInfo/carsInfo.component";
 import ListForCars from "../../components/ListForCars/listForCars.components";
 import { fetchCarsFromFirestore } from "../../firebase/carDataAccess/carDataAccess";
-import { getCars } from "../../redux/reducers/carsReducer/cars.selector";
+import {
+  getCars,
+  getFleetTotal,
+  getTotalCarsAvailable,
+  getTotalCarsNotAvailable,
+} from "../../redux/reducers/carsReducer/cars.selector";
 import history from "../../util/history";
 import "./carsAdminPage.style.css";
 
 const CarsAdminPage = () => {
   const dispatch = useDispatch();
   const allCars = useSelector(getCars);
+  const totalCars = useSelector(getFleetTotal);
+  const available = useSelector(getTotalCarsAvailable);
+  const notAvailable = useSelector(getTotalCarsNotAvailable);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     dispatch(fetchCarsFromFirestore());
     setLoading(false);
   }, [dispatch]);
-
-  const totalCars = _.size(allCars);
-
-  const available = Array.from(allCars).filter(
-    (car) => car.available === true
-  ).length;
-  const notAvailable = Array.from(allCars).filter(
-    (car) => car.available === false
-  ).length;
 
   return (
     <div>
@@ -45,7 +44,10 @@ const CarsAdminPage = () => {
       />
       <br />
 
-      <ListForCars cars={allCars} loading={loading} />
+      <ListForCars
+        cars={Array.from(_.orderBy(allCars, "available", ["desc"]))}
+        loading={loading}
+      />
     </div>
   );
 };

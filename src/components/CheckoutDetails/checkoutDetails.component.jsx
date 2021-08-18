@@ -42,7 +42,7 @@ const CheckoutDetails = ({
         <Grid.Column>$ {car.price}</Grid.Column>
 
         <Grid.Column>Total</Grid.Column>
-        <Grid.Column>$ {total}</Grid.Column>
+        <Grid.Column>$ {total.toFixed(2)}</Grid.Column>
       </Grid>
     </div>
   );

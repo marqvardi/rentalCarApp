@@ -16,6 +16,21 @@ export const fetchSingleCarFromFirestore = (id) => async (dispatch) => {
   dispatch({ type: carActionsType.FETCH_SINGLE_CAR, payload: data });
 };
 
+export const fetchCarToDelete = (id) => async (dispatch) => {
+  const data = await getSingleCarFromDatabase(id);
+
+  dispatch({ type: carActionsType.DELETE_CAR, payload: data });
+
+  return data;
+};
+
+export const deleteCar = (id) => async (dispatch) => {
+  const data = await deleteCarFromFirestore(id);
+  console.log("data that came back from firestore after deleting car", data);
+
+  // dispatch({ type: carActionsType.DELETE_CAR, payload: {} });
+};
+
 export const updateCarAvailability = (id) => async (dispatch) => {
   firestore.collection("cars").doc(id).update({
     available: false,
@@ -24,6 +39,21 @@ export const updateCarAvailability = (id) => async (dispatch) => {
 };
 
 ///Connecting to firestore
+
+const deleteCarFromFirestore = async (id) => {
+  await firestore
+    .collection("cars")
+    .doc(id)
+    .delete()
+    .then(() => {
+      // console.log("delete sucessfully");
+      // history.push("CarsAdmin");
+      // history.go();
+    })
+    .catch((error) => {
+      console.log("delete failed", error);
+    });
+};
 
 export const addCarToFirestore = async ({
   model,
@@ -54,7 +84,7 @@ export const addCarToFirestore = async ({
     });
 };
 
-const getSingleCarFromDatabase = async (id) => {
+export const getSingleCarFromDatabase = async (id) => {
   const data = firestore.collection("cars").doc(id);
 
   //Thats for a single document

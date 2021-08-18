@@ -3,6 +3,7 @@ import { carActionsType } from "./carActionTypes";
 const INITIAL_STATE = {
   allCars: [],
   car: {},
+  carToDelete: {},
 };
 
 const carsReducer = (state = INITIAL_STATE, { type, payload }) => {
@@ -26,6 +27,17 @@ const carsReducer = (state = INITIAL_STATE, { type, payload }) => {
       return {
         ...state,
         car: {},
+      };
+    case carActionsType.DELETE_CAR:
+      return {
+        ...state,
+        carToDelete: payload,
+      };
+
+    case carActionsType.CLEAR_DELETE_CAR:
+      return {
+        ...state,
+        carToDelete: payload,
       };
 
     default:

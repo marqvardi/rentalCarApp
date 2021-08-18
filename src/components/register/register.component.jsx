@@ -46,7 +46,7 @@ class Register extends React.Component {
   render() {
     // console.log(this.props);
     const { valid } = this.props;
-    console.log(this.props);
+    // console.log(this.props);
 
     return (
       <div>

@@ -34,9 +34,9 @@ const OrdersPage = (props) => {
   }, [dispatch, currentUser, isAdmin]);
 
   const handleConfirm = (orderId, carId) => {
-    console.log("wdadawd");
-    console.log("Car ID", carId);
-    console.log("Order ID", orderId);
+    // console.log("wdadawd");
+    // console.log("Car ID", carId);
+    // console.log("Order ID", orderId);
     dispatch(ReturningCar(orderId, carId, currentUser, isAdmin));
 
     toast.success("Car successfully returned");

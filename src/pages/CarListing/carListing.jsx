@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { carActionsType } from "../../redux/reducers/carsReducer/carActionTypes";
-import { Button, Container, Grid, Icon, Loader } from "semantic-ui-react";
+import { Button, Container, Grid, Loader } from "semantic-ui-react";
 import "./carListing.styles.css";
 
 import CarsCard from "../../components/carsCard/carsCard";
@@ -25,9 +25,9 @@ const CarListing = () => {
     dispatch(fetchCarsFromFirestore());
     setLoading(false);
 
-    // return () => {
-    //   dispatch({ type: carActionsType.GET_ALL_CARS, payload: {} });
-    // };
+    return () => {
+      dispatch({ type: carActionsType.GET_ALL_CARS, payload: {} });
+    };
   }, [dispatch, auth]);
 
   const renderGrid = (cars) => {

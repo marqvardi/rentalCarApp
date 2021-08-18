@@ -14,11 +14,25 @@ const CarsCard = ({ car, color, loading }) => {
       ) : (
         <Card color={color} raised>
           {available && car ? (
-            <Image src={image.url} className="imageCard" />
+            <Image
+              src={
+                image.url
+                  ? image.url
+                  : process.env.PUBLIC_URL + "/assets/NoCar.jpg"
+              }
+              className="imageCard"
+            />
           ) : (
             <div style={{ position: "relative" }}>
               {/* <Image src={"https://www.carimagery.com/img/v2/12780.jpg"} /> */}
-              <Image src={image.url} className="imageCard" />
+              <Image
+                src={
+                  image.url
+                    ? image.url
+                    : process.env.PUBLIC_URL + "/assets/NoCar.jpg"
+                }
+                className="imageCard"
+              />
 
               <div className="carNotAvailable">Not available</div>
             </div>

@@ -16,9 +16,9 @@ class CreateCars extends React.Component {
   }
 
   onSubmit = async (formValues) => {
-    console.log(formValues);
+    // console.log(formValues);
     formValues.image = this.state.imageupload;
-    console.log(formValues);
+    // console.log(formValues);
     addCarToFirestore(formValues);
   };
 

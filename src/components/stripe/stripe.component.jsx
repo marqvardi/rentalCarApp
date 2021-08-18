@@ -58,8 +58,8 @@ const StripeCheckoutButton = ({ price, basketFromRedux }) => {
             billingAddress
             shippingAddress
             image="https://svgshare.com/i/CUz.svg"
-            description={`Your total is $${price}`}
-            amount={priceForStripe}
+            description={`Your total is $${price.toFixed(2)}`}
+            amount={priceForStripe.toFixed(2)}
             panelLabel="Pay now"
             token={onToken}
             stripeKey={publishableKey}
