@@ -1,12 +1,10 @@
 import _ from "lodash";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Button, Header, Image, List, Loader, Modal } from "semantic-ui-react";
-import {
-  deleteCar,
-  fetchCarsFromFirestore,
-} from "../../firebase/carDataAccess/carDataAccess";
+import { deleteCar } from "../../firebase/carDataAccess/carDataAccess";
 import ReadMore from "../readMore/readMore.component";
 import "./listForCars.style.css";
 
@@ -19,7 +17,8 @@ const ListForCars = ({ cars, loading }) => {
   const handleDelete = () => {
     try {
       dispatch(deleteCar(selected.id));
-      dispatch(fetchCarsFromFirestore());
+
+      // dispatch(fetchCarsFromFirestore());
       toast.success("Car sucessfully deleted.");
       setOpenModal(false);
     } catch (error) {
@@ -108,7 +107,9 @@ const ListForCars = ({ cars, loading }) => {
                     </List.Content>
                   </div>
                   <div>
-                    <Button primary content="Edit" circular floated="right" />
+                    <Link to={`/editcar/${car.id}`}>
+                      <Button primary content="Edit" circular floated="right" />
+                    </Link>
                     {!car.available ? (
                       <Button
                         color="red"

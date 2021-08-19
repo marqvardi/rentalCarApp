@@ -6,33 +6,28 @@ import { addCarToFirestore } from "../../firebase/carDataAccess/carDataAccess";
 import history from "../../util/history";
 import DropZoneImage from "../dropZone/dropzoneImage.component";
 import RenderInput from "../renderinput/renderInput.component";
-import "./createCars.styles.css";
+import "./carForms.styles.css";
 
-class CreateCars extends React.Component {
+class CarForms extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = { imageupload: "" };
   }
 
   onSubmit = async (formValues) => {
-    // console.log(formValues);
     formValues.image = this.state.imageupload;
-    // console.log(formValues);
+    // console.log("seria submitted to firestore", formValues);
     addCarToFirestore(formValues);
   };
 
   handleImageUpload = (image) => {
     this.setState({ imageupload: image });
-    // setImageState(image);
-    console.log("Image from child page", image);
-
     if (_.isEmpty(image)) return;
   };
 
   render() {
     const { valid } = this.props;
-    // console.log(this.props);
+    //console.log(this.props);
 
     return (
       <div>
@@ -44,13 +39,13 @@ class CreateCars extends React.Component {
               onSubmit={this.props.handleSubmit(this.onSubmit)}
             >
               <Field
-                name="model"
+                name="carModel"
                 component={RenderInput}
                 label="Enter a model"
                 type="text"
               />
               <Field
-                name="maker"
+                name="carMaker"
                 component={RenderInput}
                 label="Enter a maker"
                 type="text"
@@ -73,7 +68,11 @@ class CreateCars extends React.Component {
                 label="Enter the price per day"
                 type="number"
               />
-              <Button color="blue" onClick={() => history.goBack()}>
+              <Button
+                type="button"
+                color="blue"
+                onClick={() => history.goBack()}
+              >
                 Go back
               </Button>
               <Button color="green" floated="right" disabled={!valid}>
@@ -82,7 +81,15 @@ class CreateCars extends React.Component {
             </Form>
           </div>
           <div className="right-content">
-            <DropZoneImage stateChanger={this.handleImageUpload} />
+            <DropZoneImage
+              stateChanger={this.handleImageUpload}
+              image={
+                this.props.initialValues
+                  ? this.props.initialValues.image.url
+                  : null
+              }
+              modeEdit={true}
+            />
           </div>
         </div>
       </div>
@@ -93,12 +100,12 @@ class CreateCars extends React.Component {
 const validate = (formValues) => {
   const errors = {};
 
-  if (!formValues.model) {
-    errors.model = "You must enter a model";
+  if (!formValues.carModel) {
+    errors.carModel = "You must enter a model";
   }
 
-  if (!formValues.maker) {
-    errors.maker = "You must enter a maker";
+  if (!formValues.carMaker) {
+    errors.carMaker = "You must enter a maker";
   }
 
   if (!formValues.description) {
@@ -127,4 +134,4 @@ const validate = (formValues) => {
 export default reduxForm({
   form: "createCars",
   validate: validate,
-})(CreateCars);
+})(CarForms);

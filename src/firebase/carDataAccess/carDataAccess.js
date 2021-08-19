@@ -25,10 +25,12 @@ export const fetchCarToDelete = (id) => async (dispatch) => {
 };
 
 export const deleteCar = (id) => async (dispatch) => {
-  const data = await deleteCarFromFirestore(id);
-  console.log("data that came back from firestore after deleting car", data);
-
-  // dispatch({ type: carActionsType.DELETE_CAR, payload: {} });
+  try {
+    deleteCarFromFirestore(id);
+    dispatch({ type: carActionsType.DELETE_CAR, payload: id });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const updateCarAvailability = (id) => async (dispatch) => {
@@ -56,8 +58,8 @@ const deleteCarFromFirestore = async (id) => {
 };
 
 export const addCarToFirestore = async ({
-  model,
-  maker,
+  carModel,
+  carMaker,
   year,
   price,
   description,
@@ -66,8 +68,8 @@ export const addCarToFirestore = async ({
   firestore
     .collection("cars")
     .add({
-      carMaker: maker,
-      carModel: model,
+      carMaker: carMaker,
+      carModel: carModel,
       year,
       price,
       description,

@@ -9,13 +9,15 @@ import "./dropzoneImage.styles.css";
 
 import { Image } from "semantic-ui-react";
 
-const DropZoneImage = ({ stateChanger }) => {
-  const [uploadFile, setUploadFile] = useState(
-    process.env.PUBLIC_URL + "/assets/nocar.jpg"
-  );
+const DropZoneImage = ({ stateChanger, image, modeEdit }) => {
+  // console.log(image);
+  // console.log(modeEdit);
+
+  const [uploadFile, setUploadFile] = useState("");
+
   const onDrop = useCallback(
     (acceptedFiles) => {
-      console.log(acceptedFiles);
+      // console.log(acceptedFiles);
       const url = `https://api.cloudinary.com/v1_1/${NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/upload`;
       acceptedFiles.forEach(async (acceptedFiles) => {
         const formData = new FormData();
@@ -28,6 +30,7 @@ const DropZoneImage = ({ stateChanger }) => {
         });
         const data = await response.json();
         // console.log(data);
+
         setUploadFile(data.url);
         stateChanger(data);
       });
@@ -53,7 +56,21 @@ const DropZoneImage = ({ stateChanger }) => {
         Drop image here
       </div>
 
-      <Image src={uploadFile} />
+      <div>
+        {modeEdit ? (
+          <Image
+            src={image ? image : process.env.PUBLIC_URL + "/assets/nocar.jpg"}
+          />
+        ) : (
+          <Image
+            src={
+              uploadFile
+                ? uploadFile
+                : process.env.PUBLIC_URL + "/assets/nocar.jpg"
+            }
+          />
+        )}
+      </div>
     </>
   );
 };

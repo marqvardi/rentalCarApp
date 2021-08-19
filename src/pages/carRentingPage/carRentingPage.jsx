@@ -27,10 +27,8 @@ const CarRentingPage = (props) => {
 
   useEffect(() => {
     dispatch(fetchSingleCarFromFirestore(id));
-
     // console.log(car);
     setLoading(false);
-
     return () => {
       dispatch({ type: carActionsType.CLEAR_CAR, payload: {} });
     };

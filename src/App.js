@@ -21,6 +21,7 @@ import CarsAdminPage from "./pages/carsAdmin/carsAdminPage";
 import { Container } from "semantic-ui-react";
 import CreateCarsPage from "./pages/createCars/createCarsPage";
 import DeleteCar from "./components/deleteCar/deleteCar.component";
+import EditCarsPage from "./pages/editCars/editCarsPage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -78,6 +79,7 @@ const App = () => {
                 <Route path="/Dashboard" component={DashboardPage} />
                 <Route path="/CarsAdmin" component={CarsAdminPage} />
                 <Route path="/CreateCars" component={CreateCarsPage} />
+                <Route path="/EditCar/:id" component={EditCarsPage} />
                 <Route path="/deleteCar/:id" component={DeleteCar} />
                 {/* <CarListing /> */}
                 {/* </Container> */}

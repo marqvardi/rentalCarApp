@@ -31,13 +31,14 @@ const carsReducer = (state = INITIAL_STATE, { type, payload }) => {
     case carActionsType.DELETE_CAR:
       return {
         ...state,
-        carToDelete: payload,
+        // tirar o carro deletado com o ID no payload
+        allCars: state.allCars.filter((car) => car.id !== payload),
       };
 
     case carActionsType.CLEAR_DELETE_CAR:
       return {
         ...state,
-        carToDelete: payload,
+        carToDelete: {},
       };
 
     default:
