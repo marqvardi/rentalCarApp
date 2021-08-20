@@ -1,18 +1,12 @@
 import _ from "lodash";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Button, Header, Image, Modal } from "semantic-ui-react";
-import {
-  deleteCar,
-  fetchCarToDelete,
-  fetchSingleCarFromFirestore,
-  getSingleCarFromDatabase,
-} from "../../firebase/carDataAccess/carDataAccess";
+import { fetchCarToDelete } from "../../firebase/carDataAccess/carDataAccess";
 import { carActionsType } from "../../redux/reducers/carsReducer/carActionTypes";
 import { fetchCarToDeleteFromRedux } from "../../redux/reducers/carsReducer/cars.selector";
-import history from "../../util/history";
-import CustomModal from "../customModal/customModal.component";
+
 import ReadMore from "../readMore/readMore.component";
 
 const DeleteCar = () => {
@@ -27,7 +21,7 @@ const DeleteCar = () => {
     return () => {
       dispatch({ type: carActionsType.CLEAR_DELETE_CAR, payload: {} });
     };
-  }, []);
+  }, [dispatch, id]);
 
   const renderActions = () => {
     return (

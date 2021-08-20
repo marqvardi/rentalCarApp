@@ -4,16 +4,13 @@ import {
   CLOUDINARY_PRESET,
   NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
 } from "../../keys";
-
 import "./dropzoneImage.styles.css";
-
 import { Image } from "semantic-ui-react";
+import _ from "lodash";
 
-const DropZoneImage = ({ stateChanger, image, modeEdit }) => {
-  // console.log(image);
-  // console.log(modeEdit);
-
+const DropZoneImage = ({ image, modeEdit, handleImageUpload }) => {
   const [uploadFile, setUploadFile] = useState("");
+  const [uploadForEdit, setUploadForEdit] = useState(image);
 
   const onDrop = useCallback(
     (acceptedFiles) => {
@@ -32,11 +29,17 @@ const DropZoneImage = ({ stateChanger, image, modeEdit }) => {
         // console.log(data);
 
         setUploadFile(data.url);
-        stateChanger(data);
+        if (modeEdit) {
+          setUploadForEdit(data.url);
+          console.log(data);
+        }
+
+        handleImageUpload(data);
+
+        if (_.isEmpty(image)) return;
       });
-      // stateChanger(acceptedFiles);
     },
-    [stateChanger]
+    [handleImageUpload, image, modeEdit]
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -59,10 +62,16 @@ const DropZoneImage = ({ stateChanger, image, modeEdit }) => {
       <div>
         {modeEdit ? (
           <Image
-            src={image ? image : process.env.PUBLIC_URL + "/assets/nocar.jpg"}
+            className="imageForCreatingCar"
+            src={
+              uploadForEdit
+                ? uploadForEdit
+                : process.env.PUBLIC_URL + "/assets/nocar.jpg"
+            }
           />
         ) : (
           <Image
+            className="imageForCreatingCar"
             src={
               uploadFile
                 ? uploadFile

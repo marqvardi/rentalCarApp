@@ -5,28 +5,33 @@ import DropZoneImage from "../../components/dropZone/dropzoneImage.component";
 import { addCarToFirestore } from "../../firebase/carDataAccess/carDataAccess";
 import "./createCarPage.styles.css";
 
-const CreateCarsPage = () => {
+const CreateCarsPage = (props) => {
+  const [imageupload, setimageupload] = useState("");
   const onSubmit = async (formValues) => {
+    formValues.image = _.pick(imageupload, ["public_id", "url"]);
     // console.log(formValues);
-    formValues.image = this.state.imageupload;
-
     addCarToFirestore(formValues);
   };
 
   const handleImageUpload = (image) => {
-    this.setState({ imageupload: image });
-
-    console.log("Image from child page", image);
-
+    setimageupload(image);
     if (_.isEmpty(image)) return;
   };
 
   return (
-    <div className="createCarsMain">
-      <div className="createCars-leftContent">
-        <CarForms onSubmit={onSubmit} handleImageUpload={handleImageUpload} />
+    <div>
+      <h2 className="createCarsText">Create a new car</h2>
+      <div className="createCarsMain">
+        <div className="createCars-leftContent">
+          <CarForms onSubmit={onSubmit} />
+        </div>
+        <div className="createCars-rightContent">
+          <DropZoneImage
+            stateChanger={handleImageUpload}
+            handleImageUpload={handleImageUpload}
+          />
+        </div>
       </div>
-      <div className="createCars-rightContent">{/* <DropZoneImage /> */}</div>
     </div>
   );
 };

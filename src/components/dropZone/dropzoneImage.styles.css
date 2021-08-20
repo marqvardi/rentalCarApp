@@ -11,6 +11,12 @@
   cursor: pointer;
 }
 
+.imageForCreatingCar {
+  object-fit: cover;
+  max-width: 500px;
+  max-height: 500px;
+}
+
 .DropZoneActive {
   border: 2px solid rebeccapurple;
   height: 4rem;

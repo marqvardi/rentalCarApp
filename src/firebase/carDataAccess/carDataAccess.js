@@ -33,6 +33,19 @@ export const deleteCar = (id) => async (dispatch) => {
   }
 };
 
+export const updateCarDetails = (car) => async (dispatch) => {
+  try {
+    const data = await updateCarToFirestore(car).then(() => {
+      // console.log("voltou do update do carro", data);
+      dispatch({ type: carActionsType.UPDATE_CAR_DETAIL, payload: data });
+    });
+    toast.success("Car successfully updated");
+    history.push("CarsAdmin");
+  } catch (error) {
+    toast.error(error);
+  }
+};
+
 export const updateCarAvailability = (id) => async (dispatch) => {
   firestore.collection("cars").doc(id).update({
     available: false,
@@ -54,6 +67,37 @@ const deleteCarFromFirestore = async (id) => {
     })
     .catch((error) => {
       console.log("delete failed", error);
+    });
+};
+
+const updateCarToFirestore = async ({
+  carModel,
+  carMaker,
+  year,
+  price,
+  description,
+  image,
+  id,
+}) => {
+  await firestore
+    .collection("cars")
+    .doc(id)
+    .update({
+      carMaker: carMaker,
+      carModel: carModel,
+      year,
+      price,
+      description,
+      available: true,
+      image: _.pick(image, "public_id", "url"),
+    })
+    .then(() => {
+      // toast.success("Car successfully updated");
+      // history.push("CarsAdmin");
+      // console.log("DocRef created with ID", docrRef.id);
+    })
+    .catch((error) => {
+      console.log("Error creating car", error);
     });
 };
 

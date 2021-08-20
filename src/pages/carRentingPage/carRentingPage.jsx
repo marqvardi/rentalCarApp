@@ -32,7 +32,7 @@ const CarRentingPage = (props) => {
     return () => {
       dispatch({ type: carActionsType.CLEAR_CAR, payload: {} });
     };
-  }, []);
+  }, [dispatch, id]);
 
   let date = new Date();
   // console.log(car);
