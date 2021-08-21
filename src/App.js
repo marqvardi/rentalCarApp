@@ -1,6 +1,5 @@
 import { Router, Route, Switch } from "react-router-dom";
 import "semantic-ui-css/semantic.min.css";
-// import FooterComponent from "./components/footer/footer.component";
 import HeaderComponent from "./components/header/header.component";
 import CarListing from "./pages/CarListing/carListing";
 import CarRentingPage from "./pages/carRentingPage/carRentingPage";
@@ -59,15 +58,12 @@ const App = () => {
       <Router history={history}>
         <div className="wrapper">
           <HeaderComponent />
-          {/* <div className="gridflex"> */}
-          {/* <div className="sidebar"> */}
+
           {currentUser && <SidebarComponent />}
-          {/* </div> */}
 
           <div className="main-content">
             <Container>
               <Switch>
-                {/* <Container className="container"> */}
                 <Route path="/" component={CarListing} exact />
                 <Route path="/renting/:id" component={CarRentingPage} />
                 <Route
@@ -81,14 +77,9 @@ const App = () => {
                 <Route path="/CreateCars" component={CreateCarsPage} />
                 <Route path="/EditCar/:id" component={EditCarsPage} />
                 <Route path="/deleteCar/:id" component={DeleteCar} />
-                {/* <CarListing /> */}
-                {/* </Container> */}
               </Switch>
             </Container>
           </div>
-
-          {/* <FooterComponent /> */}
-          {/* </div> */}
         </div>
       </Router>
     </div>

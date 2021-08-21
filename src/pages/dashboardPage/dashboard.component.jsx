@@ -18,6 +18,7 @@ import {
   getTotalCarsNotAvailable,
 } from "../../redux/reducers/carsReducer/cars.selector";
 import { fetchCarsFromFirestore } from "../../firebase/carDataAccess/carDataAccess";
+import { Container } from "semantic-ui-react";
 
 const DashboardPage = () => {
   const isAdmin = useSelector(checkIfUserIsAdmin);
@@ -44,8 +45,7 @@ const DashboardPage = () => {
   }, [dispatch, currentUser, isAdmin]);
 
   return (
-    <div style={{ maxWidth: "700px" }}>
-      {" "}
+    <Container>
       <div>
         <Revenue revenue={revenue} projectionRevenue={ProjectionRevenue} />
       </div>
@@ -57,7 +57,7 @@ const DashboardPage = () => {
           notAvailable={notAvailable}
         />
       </div>
-    </div>
+    </Container>
   );
 };
 

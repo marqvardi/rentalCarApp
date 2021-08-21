@@ -10,11 +10,24 @@
   font-weight: bold;
   cursor: pointer;
 }
+.imageGrow {
+  width: 100%;
+}
+
+.imageDropzone {
+  display: flex;
+  width: 100%;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 .imageForCreatingCar {
   object-fit: cover;
   max-width: 500px;
   max-height: 500px;
+  border-radius: 20px;
 }
 
 .DropZoneActive {

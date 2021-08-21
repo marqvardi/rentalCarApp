@@ -1,3 +1,7 @@
-.main {
-  margin-top: 50px;
+.ui.inverted.vertical.labeled.icon.ui.overlay.left.thin.visible.sidebar.menustyle.menu {
+  background-color: #006f62;
+}
+
+.itemMenu {
+  margin-top: 80px;
 }

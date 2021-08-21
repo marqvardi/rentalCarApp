@@ -10,14 +10,21 @@ const Revenue = ({ revenue, projectionRevenue }) => {
         <Statistic>
           <Statistic.Value>
             <Icon name="chart line" />{" "}
-            {projectionRevenue.toFixed(2).toLocaleString()}
+            {projectionRevenue.toLocaleString("de-DE", {
+              style: "currency",
+              currency: "GBP",
+            })}
           </Statistic.Value>
-          <Statistic.Label>Amount due</Statistic.Label>
+          <Statistic.Label>Still to receive</Statistic.Label>
         </Statistic>
 
         <Statistic>
           <Statistic.Value>
-            <Icon name="money" /> {revenue.toFixed(2)}
+            <Icon name="money" />{" "}
+            {revenue.toLocaleString("de-DE", {
+              style: "currency",
+              currency: "GBP",
+            })}
           </Statistic.Value>
           <Statistic.Label>Revenue so far</Statistic.Label>
         </Statistic>

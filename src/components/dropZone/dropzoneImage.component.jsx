@@ -50,16 +50,18 @@ const DropZoneImage = ({ image, modeEdit, handleImageUpload }) => {
   });
 
   return (
-    <>
+    <div className="imageDropzone">
       <div
         {...getRootProps()}
-        className={`${isDragActive ? "DropZoneActive" : "dropzoneImage"}`}
+        className={`${
+          isDragActive ? "DropZoneActive" : "dropzoneImage"
+        } imageGrow`}
       >
         <input {...getInputProps()} />
         Drop image here
       </div>
 
-      <div>
+      <div className="imageGrow">
         {modeEdit ? (
           <Image
             className="imageForCreatingCar"
@@ -80,7 +82,7 @@ const DropZoneImage = ({ image, modeEdit, handleImageUpload }) => {
           />
         )}
       </div>
-    </>
+    </div>
   );
 };
 

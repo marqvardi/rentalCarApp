@@ -8,18 +8,22 @@ import CarsCard from "../../components/carsCard/carsCard";
 import { Link } from "react-router-dom";
 import { getBasket } from "../../redux/reducers/checkoutReducer/checkout.selector";
 import { getCars } from "../../redux/reducers/carsReducer/cars.selector";
-import { getCurrentUser } from "../../redux/reducers/userReducer/user.selector";
+import {
+  checkIfUserIsAdmin,
+  getCurrentUser,
+} from "../../redux/reducers/userReducer/user.selector";
 import { fetchCarsFromFirestore } from "../../firebase/carDataAccess/carDataAccess";
 import _ from "lodash";
+import history from "../../util/history";
 
 const CarListing = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
-
   const BasketHasItem = useSelector(getBasket);
   const auth = useSelector(getCurrentUser);
   const cars = useSelector(getCars);
   const ArrayCars = _.orderBy(cars, ["available"], ["desc"]);
+  const isAdmin = useSelector(checkIfUserIsAdmin);
 
   useEffect(() => {
     dispatch(fetchCarsFromFirestore());

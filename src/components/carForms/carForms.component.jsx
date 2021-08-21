@@ -9,11 +9,20 @@ import "./carForms.styles.css";
 class CarForms extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { imageUrlFromInitialValues: props.initialValues.image };
+
+    if (!_.isEmpty(this.props.initialValues)) {
+      this.state = {
+        imageUrlFromInitialValues: this.props.initialValues.image,
+      };
+    }
   }
 
   onSubmit = async (formValues) => {
-    this.props.onSubmit(formValues, this.state.imageUrlFromInitialValues);
+    if (_.isEmpty(this.props.initialValues)) {
+      this.props.onSubmit(formValues, null);
+    } else {
+      this.props.onSubmit(formValues, this.state.imageUrlFromInitialValues);
+    }
   };
 
   render() {

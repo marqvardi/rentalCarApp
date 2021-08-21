@@ -8,3 +8,7 @@
   max-width: 30px auto;
   padding: 5px;
 }
+
+.ui.inverted.top.fixed.navigation.menu {
+  background-color: #006f62;
+}

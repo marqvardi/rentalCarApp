@@ -17,12 +17,14 @@ const SidebarComponent = () => {
       vertical
       visible
       width="thin"
-      className="main"
+      className="menustyle"
     >
-      <Menu.Item as={Link} name="home" to="/">
-        <Icon name="home" />
-        Home
-      </Menu.Item>
+      {!isAdmin && (
+        <Menu.Item as={Link} name="home" to="/" className="itemMenu">
+          <Icon name="home" />
+          Home
+        </Menu.Item>
+      )}
 
       {!isAdmin && (
         <Menu.Item as={Link} name="Orders" to="/Orders">
@@ -32,7 +34,12 @@ const SidebarComponent = () => {
       )}
 
       {isAdmin && (
-        <Menu.Item as={Link} name="Dashboard" to="/Dashboard">
+        <Menu.Item
+          as={Link}
+          name="Dashboard"
+          to="/Dashboard"
+          className="itemMenu"
+        >
           <Icon name="dashboard" />
           Dashboard
         </Menu.Item>
