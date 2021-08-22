@@ -51,6 +51,7 @@ export const updateCarAvailability = (id) => async (dispatch) => {
     available: false,
   });
   dispatch({ type: carActionsType.RETURN_CAR, payload: id });
+  dispatch({ type: carActionsType.CLEAR_CAR, payload: {} });
 };
 
 ///Connecting to firestore

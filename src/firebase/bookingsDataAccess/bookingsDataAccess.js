@@ -5,7 +5,7 @@ export const ReturningCar =
   (orderId, carId, currentUser, isAdmin) => async (dispatch) => {
     await returnCar(orderId, carId);
     dispatch(FetchOrders(currentUser, isAdmin));
-    console.log("returning");
+    // console.log("returning");
   };
 
 export const FetchOrders = (currentUser, isAdmin) => async (dispatch) => {

@@ -9,12 +9,12 @@ import { Link } from "react-router-dom";
 import { getBasket } from "../../redux/reducers/checkoutReducer/checkout.selector";
 import { getCars } from "../../redux/reducers/carsReducer/cars.selector";
 import {
-  checkIfUserIsAdmin,
+  // checkIfUserIsAdmin,
   getCurrentUser,
 } from "../../redux/reducers/userReducer/user.selector";
 import { fetchCarsFromFirestore } from "../../firebase/carDataAccess/carDataAccess";
 import _ from "lodash";
-import history from "../../util/history";
+// import history from "../../util/history";
 
 const CarListing = () => {
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ const CarListing = () => {
   const auth = useSelector(getCurrentUser);
   const cars = useSelector(getCars);
   const ArrayCars = _.orderBy(cars, ["available"], ["desc"]);
-  const isAdmin = useSelector(checkIfUserIsAdmin);
+  // const isAdmin = useSelector(checkIfUserIsAdmin);
 
   useEffect(() => {
     dispatch(fetchCarsFromFirestore());

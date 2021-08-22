@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, List } from "semantic-ui-react";
+import { Button, List, Modal } from "semantic-ui-react";
 
 const OrdersDetails = ({
   car,
@@ -35,13 +35,24 @@ const OrdersDetails = ({
           <List.Icon name="dollar sign" />
           <List.Content>{total.toFixed(2)}</List.Content>
           {active ? (
-            <Button
-              color="orange"
-              floated="right"
-              onClick={() => onClick(orderId, car.id)}
-            >
-              Return car
-            </Button>
+            <Modal
+              trigger={
+                <Button color="orange" floated="right">
+                  Return car
+                </Button>
+              }
+              header="Attention!"
+              content="Are you sure you want to return this car?"
+              actions={[
+                "Nope, not yet.",
+                {
+                  key: "done",
+                  content: "Yes please!",
+                  onClick: () => onClick(orderId, car.id),
+                  positive: true,
+                },
+              ]}
+            />
           ) : (
             ""
           )}

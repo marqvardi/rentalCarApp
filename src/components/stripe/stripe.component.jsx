@@ -25,7 +25,7 @@ const StripeCheckoutButton = ({ price, basketFromRedux }) => {
 
     // Get auth details and Send the booking Details + auth
     try {
-      console.log(basketFromRedux);
+      // console.log(basketFromRedux);
       createBooking(currentUser, basketFromRedux);
       dispatch(updateCarAvailability(basketFromRedux.car.id));
     } catch (error) {
